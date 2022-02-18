@@ -9,10 +9,12 @@ const Account = () => {
 	const [account, setAccount] = useState({
 		name: "",
 		amount: "",
+		checked: false,
 	});
 	const [accountEdit, setAccountEdit] = useState({
 		name: "",
 		amount: "",
+		checked: false,
 	});
 	const [accounts, setAccounts] = useState([]);
 
@@ -60,6 +62,15 @@ const Account = () => {
 					setAccountEdit({ ...accountEdit, name: "", amount: "" });
 					return;
 				}
+				return;
+			case "editChecked":
+				newAccounts = accounts.map((account) => {
+					if (account.id === payload.id) {
+						return { ...account, checked: !account.checked };
+					}
+					return account;
+				});
+				setAccounts(newAccounts);
 				return;
 			default:
 				return;
@@ -142,7 +153,40 @@ const Account = () => {
 								{!(accEdit && account.id === accEdit.id) ? (
 									<>
 										<div className="flex flex-col gap-y-4">
-											<h2>{account.name}</h2>
+											<div className="flex justify-center items-center gap-x-1">
+												<div
+													onClick={() => handleAccount("editChecked", { ...account })}
+													className="cursor-pointer">
+													{account.checked ? (
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															className="h-5 w-5"
+															viewBox="0 0 20 20"
+															fill="#3A7D44">
+															<path
+																fillRule="evenodd"
+																d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+																clipRule="evenodd"
+															/>
+														</svg>
+													) : (
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															className="h-6 w-6"
+															fill="#FF1053"
+															viewBox="0 0 24 24"
+															stroke="transparent">
+															<path
+																strokeLinecap="round"
+																strokeLinejoin="round"
+																strokeWidth={2}
+																d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+															/>
+														</svg>
+													)}
+												</div>
+												<h2>{account.name}</h2>
+											</div>
 											<h2 className="py-8 m-auto text-2xl font-bold">${account.amount}</h2>
 										</div>
 										<div className="flex justify-between">
