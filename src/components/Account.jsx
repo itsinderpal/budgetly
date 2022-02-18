@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const Account = () => {
+const Account = ({ getAllCardsForNet, cards }) => {
 	const [addAccountPopup, setAddAccountPopup] = useState(false);
 	const [accEdit, setAccEdit] = useState({
 		editing: false,
@@ -76,6 +76,18 @@ const Account = () => {
 				return;
 		}
 	};
+
+	useEffect(() => {
+		getAllCardsForNet(accounts, "account");
+	}, [accounts]);
+
+	useEffect(() => {
+		Object.keys(cards).map((card) => {
+			if (card === "account") {
+				setAccount(cards[card]);
+			}
+		});
+	}, []);
 
 	return (
 		<div className="flex flex-col gap-y-2 pb-6">
