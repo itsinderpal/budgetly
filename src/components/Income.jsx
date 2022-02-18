@@ -240,7 +240,7 @@ const Income = ({ getAllCardsForNet, cards }) => {
 									</div>
 								) : (
 									<div className="flex justify-evenly gap-x-2">
-										<div className="flex justify-center gap-x-4">
+										<div className="flex flex-col md:flex-row gap-y-2 md:gap-x-0 justify-center gap-x-4">
 											<div className="flex flex-col">
 												<label htmlFor="expEditName">Name</label>
 												<input

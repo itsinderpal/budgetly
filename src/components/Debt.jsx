@@ -161,10 +161,10 @@ const Debt = ({ getAllCardsForNet, cards }) => {
 						return (
 							<div
 								key={debt.id}
-								className="bg-gray-200 p-4 flex flex-col rounded-lg gap-y-4 shadow-md row-span-4">
+								className="bg-gray-200 p-4 flex flex-col rounded-lg md:gap-y-4 shadow-md row-span-4">
 								{!(debEdit && debt.id === debEdit.id) ? (
 									<>
-										<div className="flex flex-col gap-y-4">
+										<div className="flex flex-col md:gap-y-4">
 											<div className="flex justify-center items-center gap-x-1">
 												<div
 													onClick={() => handleDebt("editChecked", { ...debt })}
@@ -199,7 +199,7 @@ const Debt = ({ getAllCardsForNet, cards }) => {
 												</div>
 												<h2>{debt.name}</h2>
 											</div>
-											<h2 className="py-8 m-auto text-2xl font-bold">${debt.amount}</h2>
+											<h2 className="py-6 md:py-8 m-auto text-2xl font-bold">${debt.amount}</h2>
 										</div>
 										<div className="flex justify-between">
 											<button

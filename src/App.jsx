@@ -24,11 +24,11 @@ function App() {
 	}, [cards]);
 
 	return (
-		<div className="min-h-screen bg-[#9CD2FC] flex flex-col gap-y-2 items-center font-mono text-xl">
+		<div className="min-h-screen bg-[#9CD2FC] flex flex-col gap-y-2 items-center font-mono text-base md:text-lg">
 			<div className="text-3xl font-bold p-4">
 				<h1>Budgetly</h1>
 			</div>
-			<div className="w-6/12 flex flex-col gap-y-4">
+			<div className="w-10/12 md:w-9/12 lg:w-8/12 flex flex-col gap-y-4 py-4">
 				<Account getAllCardsForNet={getAllCardsForNet} cards={cards} />
 				<Debt getAllCardsForNet={getAllCardsForNet} cards={cards} />
 				<Expense getAllCardsForNet={getAllCardsForNet} cards={cards} />
