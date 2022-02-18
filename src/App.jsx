@@ -24,7 +24,7 @@ function App() {
 	}, [cards]);
 
 	return (
-		<div className="min-h-screen bg-[#9CD2FC] flex flex-col gap-y-2 items-center font-mono text-base md:text-lg">
+		<div className="min-h-screen bg-gradient-to-r from-bg-100 via-bg-200 to-bg-300 flex flex-col gap-y-2 items-center font-mono text-base md:text-lg text-center md:text-left">
 			<div className="text-3xl font-bold p-4">
 				<h1>Budgetly</h1>
 			</div>

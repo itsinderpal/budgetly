@@ -26,11 +26,11 @@ const Net = ({ cards }) => {
 
 	return (
 		<div className="flex flex-col gap-y-2">
-			<div className="flex justify-between border-b-2 border-gray-800 bg-emerald-200 rounded-lg items-center p-2">
+			<div className="flex justify-between border-b-2 border-gray-800 rounded-lg items-center p-2">
 				<h1 className="text-2xl font-bold">Net Amount</h1>
 			</div>
 			<div className="grid grid-cols-1 gap-3">
-				<div className="bg-gray-200 p-4 flex justify-center rounded-lg gap-y-4 shadow-md row-span-4 font-bold text-2xl">
+				<div className="bg-card-100 p-4 flex justify-center rounded-lg gap-y-4 shadow-md row-span-4 font-bold text-2xl">
 					${netAmt}
 				</div>
 			</div>

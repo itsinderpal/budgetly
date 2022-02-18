@@ -94,7 +94,7 @@ const Debt = ({ getAllCardsForNet, cards }) => {
 			<div className="flex justify-between border-b-2 border-gray-800 items-center py-2">
 				<h1 className="text-2xl font-bold">Debts</h1>
 				<button
-					className="p-2 bg-purple-300 rounded-lg hover:bg-purple-400 flex items-center gap-x-1"
+					className="p-2 bg-comp-100 rounded-lg hover:bg-comp-200 flex items-center gap-x-1"
 					onClick={() => setAddDebtPopup(!addDebtPopup)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,7 @@ const Debt = ({ getAllCardsForNet, cards }) => {
 				</button>
 			</div>
 			{addDebtPopup ? (
-				<div className="flex flex-col items-center bg-[#C9E3AC] rounded-lg p-4 gap-y-4">
+				<div className="flex flex-col items-center bg-bg-200 rounded-lg p-4 gap-y-4">
 					<h2 className="text-2xl underline">Add debt</h2>
 					<div className="flex flex-col gap-y-4">
 						<div className="flex justify-between items-center gap-x-2">
@@ -140,13 +140,13 @@ const Debt = ({ getAllCardsForNet, cards }) => {
 					<div className="flex items-center gap-x-4">
 						<button
 							type="submit"
-							className="p-2 bg-purple-300 rounded-lg hover:bg-purple-400"
+							className="p-2 bg-comp-100 rounded-lg hover:bg-comp-200"
 							onClick={() => handleDebt("addDebt", { ...debt })}>
 							Add
 						</button>
 						<button
 							type="submit"
-							className="p-2 bg-purple-300 rounded-lg hover:bg-purple-400"
+							className="p-2 bg-comp-100 rounded-lg hover:bg-comp-200"
 							onClick={() => setAddDebtPopup(!addDebtPopup)}>
 							Cancel
 						</button>
@@ -161,7 +161,7 @@ const Debt = ({ getAllCardsForNet, cards }) => {
 						return (
 							<div
 								key={debt.id}
-								className="bg-gray-200 p-4 flex flex-col rounded-lg md:gap-y-4 shadow-md row-span-4">
+								className="bg-card-100 p-4 flex flex-col rounded-lg md:gap-y-4 shadow-md row-span-4">
 								{!(debEdit && debt.id === debEdit.id) ? (
 									<>
 										<div className="flex flex-col md:gap-y-4">
