@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const Income = () => {
-	const [addAccountPopup, setAddAccountPopup] = useState(false);
-	const [accEdit, setAccEdit] = useState({
+const Income = ({ getAllCardsForNet, cards }) => {
+	const [addIncomePopup, setAddIncomePopup] = useState(false);
+	const [incEdit, setAccEdit] = useState({
 		editing: false,
 		id: "",
 	});
-	const [account, setAccount] = useState({
+	const [income, setIncome] = useState({
 		name: "",
 		amount: "",
 		checked: false,
 	});
-	const [accountEdit, setAccountEdit] = useState({
+	const [incomeEdit, setIncomeEdit] = useState({
 		name: "",
 		amount: "",
 		checked: false,
 	});
-	const [accounts, setAccounts] = useState([]);
+	const [incomes, setIncomes] = useState([]);
 
 	const checkEmptyValues = (obj) => {
 		if (Object.keys(obj).length === 0) {
@@ -29,48 +29,48 @@ const Income = () => {
 		return true;
 	};
 
-	const handleAccount = (type, payload = {}) => {
-		let newAccounts;
+	const handleIncome = (type, payload = {}) => {
+		let newIncomes;
 		switch (type) {
-			case "addAccount":
+			case "addIncome":
 				if (checkEmptyValues(payload)) {
-					let newAccount = {
+					let newIncome = {
 						id: Date.now(),
 						name: payload.name,
 						amount: payload.amount,
 					};
-					setAccounts([...accounts, newAccount]);
-					setAccount({ ...account, name: "", amount: "" });
-					setAddAccountPopup(!addAccountPopup);
+					setIncomes([...incomes, newIncome]);
+					setIncome({ ...income, name: "", amount: "" });
+					setAddIncomePopup(!addIncomePopup);
 					return;
 				}
 				return;
-			case "deleteAccount":
-				newAccounts = accounts.filter((account) => account.id !== payload.id);
-				setAccounts(newAccounts);
+			case "deleteIncome":
+				newIncomes = incomes.filter((income) => income.id !== payload.id);
+				setIncomes(newIncomes);
 				return;
-			case "editAccount":
+			case "editIncome":
 				if (checkEmptyValues(payload)) {
-					newAccounts = accounts.map((account) => {
-						if (account.id === payload.id) {
-							return { ...account, name: payload.name, amount: payload.amount };
+					newIncomes = incomes.map((income) => {
+						if (income.id === payload.id) {
+							return { ...income, name: payload.name, amount: payload.amount };
 						}
-						return account;
+						return income;
 					});
-					setAccounts(newAccounts);
-					setAccEdit({ ...accEdit, editing: false, id: "" });
-					setAccountEdit({ ...accountEdit, name: "", amount: "" });
+					setIncomes(newIncomes);
+					setAccEdit({ ...incEdit, editing: false, id: "" });
+					setIncomeEdit({ ...incomeEdit, name: "", amount: "" });
 					return;
 				}
 				return;
 			case "editChecked":
-				newAccounts = accounts.map((account) => {
-					if (account.id === payload.id) {
-						return { ...account, checked: !account.checked };
+				newIncomes = incomes.map((income) => {
+					if (income.id === payload.id) {
+						return { ...income, checked: !income.checked };
 					}
-					return account;
+					return income;
 				});
-				setAccounts(newAccounts);
+				setIncomes(newIncomes);
 				return;
 			default:
 				return;
@@ -78,24 +78,24 @@ const Income = () => {
 	};
 
 	useEffect(() => {
-		getAllCardsForNet(accounts, "account");
-	}, [accounts]);
+		getAllCardsForNet(incomes, "income");
+	}, [incomes]);
 
 	useEffect(() => {
 		Object.keys(cards).map((card) => {
-			if (card === "account") {
-				setAccount(cards[card]);
+			if (card === "income") {
+				setIncomes(cards[card]);
 			}
 		});
-	}, []);
+	}, [cards]);
 
 	return (
 		<div className="flex flex-col gap-y-2 pb-6">
 			<div className="flex justify-between border-b-2 border-gray-800 items-center py-2">
-				<h1 className="text-2xl font-bold">Accounts</h1>
+				<h1 className="text-2xl font-bold">Incomes</h1>
 				<button
 					className="p-2 bg-purple-300 rounded-lg hover:bg-purple-400 flex items-center gap-x-1"
-					onClick={() => setAddAccountPopup(!addAccountPopup)}>
+					onClick={() => setAddIncomePopup(!addIncomePopup)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="h-6 w-6"
@@ -112,28 +112,28 @@ const Income = () => {
 					<span>ADD</span>
 				</button>
 			</div>
-			{addAccountPopup ? (
+			{addIncomePopup ? (
 				<div className="flex flex-col items-center bg-[#C9E3AC] rounded-lg p-4 gap-y-4">
-					<h2 className="text-2xl underline">Add account</h2>
+					<h2 className="text-2xl underline">Add income</h2>
 					<div className="flex flex-col gap-y-4">
 						<div className="flex justify-between items-center gap-x-2">
-							<label htmlFor="accName">Name:</label>
+							<label htmlFor="expName">Name:</label>
 							<input
 								type="text"
-								id="accName"
-								value={account.name}
+								id="expName"
+								value={income.name}
 								className="p-1 outline-none rounded-lg focus:bg-gray-200"
-								onChange={(e) => setAccount({ ...account, name: e.target.value })}
+								onChange={(e) => setIncome({ ...income, name: e.target.value })}
 							/>
 						</div>
 						<div className="flex justify-between items-center gap-x-2">
-							<label htmlFor="accAmt">Amount:</label>
+							<label htmlFor="expAmt">Amount:</label>
 							<input
 								type="number"
-								id="accAmt"
+								id="expAmt"
 								className="p-1 outline-none rounded-lg focus:bg-gray-200"
-								value={account.amount}
-								onChange={(e) => setAccount({ ...account, amount: e.target.value })}
+								value={income.amount}
+								onChange={(e) => setIncome({ ...income, amount: e.target.value })}
 							/>
 						</div>
 					</div>
@@ -141,13 +141,13 @@ const Income = () => {
 						<button
 							type="submit"
 							className="p-2 bg-purple-300 rounded-lg hover:bg-purple-400"
-							onClick={() => handleAccount("addAccount", { ...account })}>
+							onClick={() => handleIncome("addIncome", { ...income })}>
 							Add
 						</button>
 						<button
 							type="submit"
 							className="p-2 bg-purple-300 rounded-lg hover:bg-purple-400"
-							onClick={() => setAddAccountPopup(!addAccountPopup)}>
+							onClick={() => setAddIncomePopup(!addIncomePopup)}>
 							Cancel
 						</button>
 					</div>
@@ -156,20 +156,18 @@ const Income = () => {
 				""
 			)}
 			<div>
-				<div className="grid grid-cols-2 gap-3">
-					{accounts.map((account) => {
+				<div className="grid grid-cols-1 gap-3">
+					{incomes.map((income) => {
 						return (
-							<div
-								key={account.id}
-								className="bg-gray-200 p-4 flex flex-col rounded-lg gap-y-4 shadow-md row-span-4">
-								{!(accEdit && account.id === accEdit.id) ? (
-									<>
-										<div className="flex flex-col gap-y-4">
-											<div className="flex justify-center items-center gap-x-1">
+							<div key={income.id} className="bg-gray-200 p-4 rounded-lg shadow-md">
+								{!(incEdit && income.id === incEdit.id) ? (
+									<div className="grid grid-cols-2">
+										<div className="flex justify-between">
+											<div className="flex justify-center items-center gap-x-4">
 												<div
-													onClick={() => handleAccount("editChecked", { ...account })}
+													onClick={() => handleIncome("editChecked", { ...income })}
 													className="cursor-pointer">
-													{account.checked ? (
+													{income.checked ? (
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
 															className="h-5 w-5"
@@ -197,15 +195,17 @@ const Income = () => {
 														</svg>
 													)}
 												</div>
-												<h2>{account.name}</h2>
+												<h2>{income.name}</h2>
 											</div>
-											<h2 className="py-8 m-auto text-2xl font-bold">${account.amount}</h2>
+											<div>
+												<h2 className="py-2 m-auto text-2xl font-bold">${income.amount}</h2>
+											</div>
 										</div>
-										<div className="flex justify-between">
+										<div className="flex justify-end gap-x-2">
 											<button
 												onClick={() => {
-													setAccountEdit({ ...account });
-													setAccEdit({ ...accEdit, editing: true, id: account.id });
+													setIncomeEdit({ ...income });
+													setAccEdit({ ...incEdit, editing: true, id: income.id });
 												}}>
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +221,7 @@ const Income = () => {
 													/>
 												</svg>
 											</button>
-											<button onClick={() => handleAccount("deleteAccount", { ...account })}>
+											<button onClick={() => handleIncome("deleteIncome", { ...income })}>
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
 													className="h-6 w-6"
@@ -237,33 +237,31 @@ const Income = () => {
 												</svg>
 											</button>
 										</div>
-									</>
+									</div>
 								) : (
-									<div className="flex flex-col gap-y-2">
-										<div className="flex flex-col gap-y-2">
-											<div className="flex flex-col gap-y-1">
-												<label htmlFor="accEditName">Name</label>
+									<div className="flex justify-evenly gap-x-2">
+										<div className="flex justify-center gap-x-4">
+											<div className="flex flex-col">
+												<label htmlFor="expEditName">Name</label>
 												<input
 													type="text"
-													value={accountEdit.name}
+													value={incomeEdit.name}
 													className="p-1 outline-none rounded-lg focus:bg-gray-200"
-													onChange={(e) => setAccountEdit({ ...accountEdit, name: e.target.value })}
+													onChange={(e) => setIncomeEdit({ ...incomeEdit, name: e.target.value })}
 												/>
 											</div>
-											<div className="flex flex-col gap-y-1">
-												<label htmlFor="accEditAmount">Amount</label>
+											<div className="flex flex-col">
+												<label htmlFor="expEditAmount">Amount</label>
 												<input
 													type="number"
-													value={accountEdit.amount}
+													value={incomeEdit.amount}
 													className="p-1 outline-none rounded-lg focus:bg-gray-200"
-													onChange={(e) =>
-														setAccountEdit({ ...accountEdit, amount: e.target.value })
-													}
+													onChange={(e) => setIncomeEdit({ ...incomeEdit, amount: e.target.value })}
 												/>
 											</div>
 										</div>
-										<div className="flex justify-between">
-											<button onClick={() => setAccEdit(!accEdit)}>
+										<div className="flex flex-col justify-between">
+											<button onClick={() => setAccEdit(!incEdit)}>
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
 													className="h-6 w-6"
@@ -280,7 +278,7 @@ const Income = () => {
 											</button>
 											<button
 												onClick={() =>
-													handleAccount("editAccount", { ...accountEdit, id: account.id })
+													handleIncome("editIncome", { ...incomeEdit, id: income.id })
 												}>
 												<svg
 													xmlns="http://www.w3.org/2000/svg"

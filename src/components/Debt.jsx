@@ -84,10 +84,10 @@ const Debt = ({ getAllCardsForNet, cards }) => {
 	useEffect(() => {
 		Object.keys(cards).map((card) => {
 			if (card === "debt") {
-				setDebt(cards[card]);
+				setDebts(cards[card]);
 			}
 		});
-	}, []);
+	}, [cards]);
 
 	return (
 		<div className="flex flex-col gap-y-2 pb-6">

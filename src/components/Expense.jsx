@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Expenses = ({ getAllCardsForNet, cards }) => {
+const Expense = ({ getAllCardsForNet, cards }) => {
 	const [addExpensePopup, setAddExpensePopup] = useState(false);
 	const [expEdit, setAccEdit] = useState({
 		editing: false,
@@ -84,10 +84,10 @@ const Expenses = ({ getAllCardsForNet, cards }) => {
 	useEffect(() => {
 		Object.keys(cards).map((card) => {
 			if (card === "expense") {
-				setExpense(cards[card]);
+				setExpenses(cards[card]);
 			}
 		});
-	}, []);
+	}, [cards]);
 
 	return (
 		<div className="flex flex-col gap-y-2 pb-6">
@@ -308,4 +308,4 @@ const Expenses = ({ getAllCardsForNet, cards }) => {
 	);
 };
 
-export default Expenses;
+export default Expense;

@@ -10,19 +10,13 @@ const Net = ({ cards }) => {
 			return;
 		}
 		Object.keys(cards).map((card) => {
-			// if (card === "account" || card === "debt") {
-				// if (cards[card].length === 0) {
-				// 	setNetAmt(0);
-				// 	return;
-				// }
-				cards[card].map((c) => {
-					if (c.checked) {
-						total = Number(total + Number(c.amount));
-					}
-					return;
-				});
-				setNetAmt(total);
-			// }
+			cards[card].map((c) => {
+				if (c.checked) {
+					total = Number(total + Number(c.amount));
+				}
+				return;
+			});
+			setNetAmt(total);
 		});
 	};
 
@@ -32,7 +26,7 @@ const Net = ({ cards }) => {
 
 	return (
 		<div className="flex flex-col gap-y-2">
-			<div className="flex justify-between border-b-2 border-gray-800 items-center py-2">
+			<div className="flex justify-between border-b-2 border-gray-800 bg-emerald-200 rounded-lg items-center p-2">
 				<h1 className="text-2xl font-bold">Net Amount</h1>
 			</div>
 			<div className="grid grid-cols-1 gap-3">
