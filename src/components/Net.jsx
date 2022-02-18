@@ -10,7 +10,7 @@ const Net = ({ cards }) => {
 			return;
 		}
 		Object.keys(cards).map((card) => {
-			if (card === "account" || card === "debt") {
+			// if (card === "account" || card === "debt") {
 				// if (cards[card].length === 0) {
 				// 	setNetAmt(0);
 				// 	return;
@@ -22,7 +22,7 @@ const Net = ({ cards }) => {
 					return;
 				});
 				setNetAmt(total);
-			}
+			// }
 		});
 	};
 

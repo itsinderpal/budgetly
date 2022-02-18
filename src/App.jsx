@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Account from "./components/Account";
 import Debt from "./components/Debt";
 import Net from "./components/Net";
+import Expenses from './components/Expenses';
 
 function App() {
 	const [cards, setCards] = useState({});
@@ -29,6 +30,7 @@ function App() {
 			<div className="w-6/12 flex flex-col gap-y-4">
 				<Account getAllCardsForNet={getAllCardsForNet} cards={cards} />
 				<Debt getAllCardsForNet={getAllCardsForNet} cards={cards} />
+				<Expenses getAllCardsForNet={getAllCardsForNet} cards={cards} />
 				<Net cards={cards} />
 			</div>
 		</div>
