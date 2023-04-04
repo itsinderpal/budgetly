@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const Net = ({ cards }) => {
-	const [netAmt, setNetAmt] = useState("");
+	const [netAmt, setNetAmt] = useState(0);
 
 	const calculateNet = (cards) => {
 		let total = 0;
@@ -9,15 +9,31 @@ const Net = ({ cards }) => {
 			setNetAmt(0);
 			return;
 		}
-		Object.keys(cards).map((card) => {
+		Object.keys(cards).reduce((acc, card) => {
+			// check which card it is
+			// then check if it is checked
+			// then return total
 			cards[card].map((c) => {
-				if (c.checked) {
-					total = Number(total + Number(c.amount));
+				if (card == "expense" || card == "debt") {
+					if (c.checked) {
+						console.log("checked");
+						acc -= Number(c.amount);
+						return acc;
+					}
+					return acc;
+				} else {
+					if (c.checked) {
+						acc += Number(c.amount);
+						return acc;
+					}
 				}
-				return;
+				return acc;
 			});
-			setNetAmt(total);
-		});
+			total = acc;
+			console.log(total, "total");
+			return acc;
+		}, 0);
+		setNetAmt(total);
 	};
 
 	useEffect(() => {
