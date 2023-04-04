@@ -162,11 +162,11 @@ const Income = ({ getAllCardsForNet, cards }) => {
 							<div key={income.id} className="bg-card-100 p-4 rounded-lg shadow-md">
 								{!(incEdit && income.id === incEdit.id) ? (
 									<div className="grid grid-cols-2">
-										<div className="flex justify-between">
+										<div
+											className="flex justify-between"
+											onClick={() => handleIncome("editChecked", { ...income })}>
 											<div className="flex justify-center items-center gap-x-4">
-												<div
-													onClick={() => handleIncome("editChecked", { ...income })}
-													className="cursor-pointer">
+												<div className="cursor-pointer">
 													{income.checked ? (
 														<svg
 															xmlns="http://www.w3.org/2000/svg"

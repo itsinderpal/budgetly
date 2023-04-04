@@ -164,11 +164,11 @@ const Account = ({ getAllCardsForNet, cards }) => {
 								className="bg-card-100 p-4 flex flex-col rounded-lg md:gap-y-4 shadow-md">
 								{!(accEdit && account.id === accEdit.id) ? (
 									<>
-										<div className="flex flex-col md:gap-y-4">
+										<div
+											className="flex flex-col md:gap-y-4"
+											onClick={() => handleAccount("editChecked", { ...account })}>
 											<div className="flex justify-center items-center gap-x-1">
-												<div
-													onClick={() => handleAccount("editChecked", { ...account })}
-													className="cursor-pointer">
+												<div className="cursor-pointer">
 													{account.checked ? (
 														<svg
 															xmlns="http://www.w3.org/2000/svg"

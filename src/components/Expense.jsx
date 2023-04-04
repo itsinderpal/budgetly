@@ -162,11 +162,11 @@ const Expense = ({ getAllCardsForNet, cards }) => {
 							<div key={expense.id} className="bg-card-100 p-4 rounded-lg shadow-md">
 								{!(expEdit && expense.id === expEdit.id) ? (
 									<div className="grid grid-cols-2">
-										<div className="flex justify-between">
+										<div
+											className="flex justify-between"
+											onClick={() => handleExpense("editChecked", { ...expense })}>
 											<div className="flex justify-center items-center gap-x-4">
-												<div
-													onClick={() => handleExpense("editChecked", { ...expense })}
-													className="cursor-pointer">
+												<div className="cursor-pointer">
 													{expense.checked ? (
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
